@@ -5,11 +5,6 @@ const routes = [
     path: '/',
     name: 'RegisterView',
     component: () => import('@/views/RegisterView.vue')
-  },
-  {
-    path: '/LoginView',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   }
 ]
 
