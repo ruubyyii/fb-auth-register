@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Register from '@/views/RegisterView.vue'
 import Perfil from '@/views/PerfilView.vue'
+import Login from '@/views/LoginView.vue'
 import { auth } from '@/db/firebase'
 
 const routes = [
@@ -10,10 +11,14 @@ const routes = [
     component: Register
   },
   {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
     path: '/perfil',
     name: 'perfil',
     component: Perfil,
-    props: (route) => ({ userName: route.params.userName }),
     meta: { requiresAuth: true },
   }
 ]

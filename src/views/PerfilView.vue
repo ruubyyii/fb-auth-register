@@ -1,7 +1,6 @@
 <template>
     <section>
-        <h1 v-if="userName">Bienvenido {{  userName }}</h1>
-        <h1 v-else>cargando...</h1>
+        <h1>Bienvenido {{  user.email }}</h1>
         <button @click="logout">Cerrar sesion</button>
     </section>
 </template>
@@ -13,22 +12,19 @@ export default {
     name: 'PerfilView',
     data() {
         return {
-            userName: null,
+            user:{
+                user: null
+            }
         }
     },
     mounted(){
-        const currentUser = auth.currentUser;
-        if(currentUser){
-            this.userName = currentUser.email
-        }else{
-            this.$router.push({name: 'register'})
-        }
+            this.user = auth.currentUser
     },
     methods:{
         async logout(){
             try{
                 await signOut(auth);
-                this.$router.push({name: 'register'})
+                this.$router.push({name: 'login'})
             }catch(error){
                 console.error('Error al cerrar sesion.')
                 
