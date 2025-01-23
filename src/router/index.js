@@ -29,12 +29,18 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const currentUser = auth.currentUser
-
-  if (to.matched.some((record) => record.meta.requiresAuth) && !currentUser){
-    next({name: 'register'});
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth) 
+  if ( requiresAuth ) {
+    const unsubscribe = auth.onAuthStateChanged( (user) =>{
+      if (user){
+        next()
+      }else{
+        next({name: 'login'})
+      }
+      unsubscribe()
+    })
   }else{
-    next();
+    next()
   }
 })
 
